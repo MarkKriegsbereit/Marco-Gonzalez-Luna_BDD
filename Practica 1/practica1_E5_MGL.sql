@@ -2,16 +2,10 @@
 considerando el escenario de que el esquema SALES se encuentra en una instancia (servidor) A 
 y el esquema PRODUCTION en otra instancia (servidor) B.*/
 
-
+use BDDAdventureWorks2022
 
 WITH VentasPorCategoria AS (
-    SELECT ppc.ProductCategoryID, pp.Name as NameProd, ppc.Name, pp.ProductID, SUM(sod.OrderQty*sod.UnitPrice) AS TotalVendido
-    
-		FROM Sales.SalesOrderDetail sod
-		JOIN Production.Product pp ON sod.ProductID = pp.ProductID
-		JOIN Production.ProductSubcategory pps ON pp.ProductSubcategoryID = pps.ProductSubcategoryID
-		JOIN Production.ProductCategory ppc ON pps.ProductCategoryID = ppc.ProductCategoryID
-		GROUP BY ppc.ProductCategoryID, pp.Name, ppc.Name, pp.ProductID
+ 
 )
 
 SELECT * FROM VentasPorCategoria V1
@@ -22,6 +16,11 @@ WHERE TotalVendido = (
 	
 )
 ORDER BY v1.ProductCategoryID;
+
+
+
+
+
 
 go
 
